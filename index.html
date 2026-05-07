@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student ID Card Generator</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+body{
+margin:0;
+padding:20px;
+background:#ececec;
+font-family:Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* FORM */
+
+.form-box{
+width:340px;
+background:white;
+padding:18px;
+border-radius:18px;
+margin-bottom:25px;
+box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.form-box h2{
+margin-top:0;
+text-align:center;
+color:#9800a8;
+}
+
+.input-box{
+position:relative;
+margin-bottom:10px;
+}
+
+.input-box i{
+position:absolute;
+left:14px;
+top:50%;
+transform:translateY(-50%);
+color:#9800a8;
+font-size:15px;
+}
+
+.input-box input{
+width:100%;
+padding:12px 12px 12px 42px;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:15px;
+box-sizing:border-box;
+}
+
+.form-box label{
+font-size:14px;
+font-weight:bold;
+display:block;
+margin-top:10px;
+margin-bottom:5px;
+}
+
+/* CARD */
+
+.id-card{
+width:340px;
+height:540px;
+background:#f4f4f4;
+border-radius:22px;
+overflow:hidden;
+position:relative;
+margin-bottom:30px;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+/* FRONT */
+
+.front-header{
+background:#9800a8;
+height:165px;
+color:white;
+text-align:center;
+position:relative;
+padding-top:20px;
+}
+
+.front-header::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-1px;
+width:100%;
+height:58px;
+background:#f4f4f4;
+border-radius:50% 50% 0 0;
+}
+
+.logo{
+position:absolute;
+left:18px;
+top:18px;
+background:white;
+padding:4px;
+border-radius:6px;
+}
+
+.logo img{
+width:52px;
+}
+
+.header-text{
+margin-left:70px;
+padding-right:10px;
+}
+
+.header-text h1{
+margin:0;
+font-size:15px;
+line-height:1.3;
+}
+
+.header-text p{
+margin:2px 0;
+font-size:16px;
+}
+
+.estd{
+margin-left:-40px !important;
+font-size:12px !important;
+}
+
+.dept{
+margin-top:5px;
+font-size:22px;
+font-weight:bold;
+color:#ffd500;
+}
+
+.photo-box{
+text-align:center;
+margin-top:-45px;
+position:relative;
+z-index:5;
+}
+
+.photo-box img{
+width:115px;
+height:140px;
+object-fit:cover;
+border:3px solid red;
+border-radius:8px;
+background:white;
+}
+
+.student-name{
+text-align:center;
+color:#000080;
+font-size:26px;
+font-weight:bold;
+margin-top:1px;
+}
+
+.info{
+padding:20px;
+margin-top:1px;
+}
+
+.info-row{
+display:flex;
+margin-bottom:8px;
+font-size:17px;
+line-height:1.1;
+}
+
+.label{
+width:110px;
+font-weight:bold;
+}
+
+.signature{
+position:absolute;
+right:18px;
+bottom:20px;
+text-align:center;
+}
+
+.signature img{
+width:78px;
+}
+
+.signature p{
+margin:0;
+margin-top:-10px;
+font-size:13px;
+}
+
+.front-bottom-design{
+position:absolute;
+bottom:0;
+width:100%;
+background:linear-gradient(90deg,#6d0078,#c100c1);
+padding:10px 0;
+}
+
+/* BACK */
+
+.top-wave{
+position:relative;
+height:70px;
+background:linear-gradient(135deg,#7b008a,#d100d1);
+overflow:hidden;
+}
+
+.top-wave::before{
+content:"";
+position:absolute;
+bottom:-38px;
+left:-20px;
+width:120%;
+height:75px;
+background:#f4f4f4;
+border-radius:50%;
+}
+
+.back-content{
+padding:10px 18px;
+}
+
+.back-row{
+display:flex;
+margin-bottom:7px;
+font-size:15px;
+line-height:1.35;
+}
+
+.back-label{
+width:125px;
+font-weight:bold;
+}
+
+.blood{
+color:red;
+font-size:17px;
+font-weight:bold;
+margin-top:10px;
+margin-bottom:14px;
+}
+
+.notice{
+text-align:center;
+font-size:13px;
+font-weight:bold;
+line-height:1.45;
+}
+
+.notice p{
+margin:0;
+}
+
+.notice .first{
+margin-bottom:7px;
+}
+
+.qr{
+text-align:center;
+margin-top:14px;
+}
+
+.qr img{
+width:82px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.college{
+text-align:center;
+margin-top:12px;
+}
+
+.college h2{
+margin:0;
+font-size:15px;
+}
+
+.college p{
+margin:2px 0;
+font-size:10px;
+}
+
+.footer{
+position:absolute;
+bottom:0;
+width:100%;
+background:linear-gradient(90deg,#6d0078,#c100c1);
+color:white;
+text-align:center;
+padding:6px 0;
+font-size:12px;
+font-weight:bold;
+}
+
+/* BUTTON */
+
+.btn{
+background:#9800a8;
+color:white;
+border:none;
+padding:14px 28px;
+border-radius:10px;
+font-size:16px;
+font-weight:bold;
+margin-top:10px;
+margin-bottom:20px;
+cursor:pointer;
+width:340px;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#7d0089;
+transform:translateY(-2px);
+}
+
+/* DEVELOPER SECTION */
+
+.developer-section{
+width:340px;
+background:white;
+padding:22px 18px;
+border-radius:18px;
+box-shadow:0 4px 15px rgba(0,0,0,0.15);
+text-align:center;
+margin-bottom:20px;
+}
+
+.developer-text{
+font-size:18px;
+font-weight:bold;
+color:#9800a8;
+margin-bottom:18px;
+letter-spacing:0.5px;
+}
+
+.social-icons{
+display:flex;
+justify-content:center;
+gap:18px;
+}
+
+.social{
+width:52px;
+height:52px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+color:white;
+transition:0.3s;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.social:hover{
+transform:translateY(-4px) scale(1.08);
+}
+
+.facebook{
+background:linear-gradient(135deg,#1877f2,#0d5ddf);
+}
+
+.instagram{
+background:linear-gradient(135deg,#ff0069,#ff7a00,#ffd600);
+}
+
+.whatsapp{
+background:linear-gradient(135deg,#25d366,#128c7e);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="form-box">
+
+<h2>ID Card Generator</h2>
+
+<div class="input-box">
+<i class="fa-solid fa-user"></i>
+<input type="text" id="nameInput" placeholder="Student Name">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-id-card"></i>
+<input type="text" id="rollInput" placeholder="Roll Number">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-book"></i>
+<input type="text" id="classInput" placeholder="Class">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-graduation-cap"></i>
+<input type="text" id="subjectInput" placeholder="Subject">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-calendar"></i>
+<input type="text" id="sessionInput" placeholder="Session">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-clock"></i>
+<input type="text" id="expiryInput" placeholder="Expire Date">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-phone"></i>
+<input type="text" id="mobileInput" placeholder="Mobile Number">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-phone-volume"></i>
+<input type="text" id="emergencyInput" placeholder="Emergency Mobile Number">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-user-tie"></i>
+<input type="text" id="fatherInput" placeholder="Father Name">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-person-dress"></i>
+<input type="text" id="motherInput" placeholder="Mother Name">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-location-dot"></i>
+<input type="text" id="addressInput" placeholder="Address">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-droplet"></i>
+<input type="text" id="bloodInput" placeholder="Blood Group">
+</div>
+
+<div class="input-box">
+<i class="fa-solid fa-qrcode"></i>
+<input type="text" id="qrInput" placeholder="QR Code Text">
+</div>
+
+<label>Upload Profile Photo</label>
+
+<div class="input-box">
+<i class="fa-solid fa-image"></i>
+<input type="file" id="photoInput" accept="image/*">
+</div>
+
+<button class="btn" onclick="updateCard()">
+Generate Card
+</button>
+
+</div>
+
+<!-- FRONT CARD -->
+
+<div class="id-card">
+
+<div class="front-header">
+
+<div class="logo">
+<img
+src="https://raw.githubusercontent.com/thenomandev/media/main/Student%20card/Barisal%20College%20Logo.png">
+</div>
+
+<div class="header-text">
+
+<h1>বরিশাল সরকারি কলেজ, বরিশাল</h1>
+
+<p>Barishal Govt. College, Barishal</p>
+
+<p class="estd">স্থাপিত: ১৯৬৩ খ্রি.</p>
+
+</div>
+
+<div class="dept" id="studentSubject">
+ব্যবস্থাপনা বিভাগ
+</div>
+
+</div>
+
+<div class="photo-box">
+
+<img id="studentPhoto"
+src="https://raw.githubusercontent.com/thenomandev/media/main/Student%20card/Profile%20pic.jpg">
+
+</div>
+
+<div class="student-name" id="studentName">
+আব্দুল্লাহ-আল নোমান
+</div>
+
+<div class="info">
+
+<div class="info-row">
+<div class="label">শ্রেণি</div>
+<div id="studentClass">: স্নাতক (সম্মান)</div>
+</div>
+
+<div class="info-row">
+<div class="label">রোল</div>
+<div id="studentRoll">: ১৯২৬১১১</div>
+</div>
+
+<div class="info-row">
+<div class="label">সেশন</div>
+<div id="studentSession">: ২০১৯-২০</div>
+</div>
+
+<div class="info-row">
+<div class="label">মেয়াদ</div>
+<div id="studentExpiry">: ডিসেম্বর ২০২৭</div>
+</div>
+
+<div class="info-row">
+<div class="label">মোবাইল</div>
+<div id="studentMobile">: ০১৯৩০-১১১১১১</div>
+</div>
+
+</div>
+
+<div class="signature">
+
+<img
+src="https://raw.githubusercontent.com/thenomandev/media/main/Student%20card/Principal%20signature%20.png">
+
+<p>অধ্যক্ষ</p>
+
+</div>
+
+<div class="front-bottom-design"></div>
+
+</div>
+
+<!-- BACK CARD -->
+
+<div class="id-card">
+
+<div class="top-wave"></div>
+
+<div class="back-content">
+
+<div class="back-row">
+<div class="back-label">পিতা</div>
+<div id="studentFather">: মোঃ সফিউল আজম খান</div>
+</div>
+
+<div class="back-row">
+<div class="back-label">মাতা</div>
+<div id="studentMother">: মোসাঃ শাহনাজ পারভীন</div>
+</div>
+
+<div class="back-row">
+<div class="back-label">স্থায়ী ঠিকানা</div>
+<div id="studentAddress">: রাজাপুর, ঝালকাঠি</div>
+</div>
+
+<div class="back-row">
+<div class="back-label">জরুরি যোগাযোগ</div>
+<div id="studentEmergency">: ০১৭১০-২২২২২২</div>
+</div>
+
+<div class="blood" id="studentBlood">
+ব্লাড গ্রুপ: B+
+</div>
+
+<div class="notice">
+
+<p class="first">
+এই কার্ডটি হস্তান্তরযোগ্য নয়।
+</p>
+
+<p>
+এটি পরিত্যক্ত অবস্থায় পাওয়া গেলে
+</p>
+
+<p>
+নিম্নোক্ত ঠিকানায় পৌঁছানোর অনুরোধ রইলো।
+</p>
+
+</div>
+
+<div class="qr">
+
+<img id="qrCode"
+src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=StudentID">
+
+</div>
+
+<div class="college">
+
+<h2>বরিশাল সরকারি কলেজ, বরিশাল</h2>
+
+<p>ফোন: ০২৪৭৮৮৬৪৬১৪</p>
+
+<p>ই-মেইল: principal_gbc@yahoo.com</p>
+
+</div>
+
+</div>
+
+<div class="footer">
+ওয়েবসাইট: www.gbc.gov.bd
+</div>
+
+</div>
+
+<button class="btn" onclick="downloadPDF()">
+<i class="fa-solid fa-file-pdf"></i>
+Download ID Card
+</button>
+
+<div class="developer-section">
+
+<div class="developer-text">
+Development: @thenomandev
+</div>
+
+<div class="social-icons">
+
+<a href="https://www.facebook.com/nknoman20"
+target="_blank"
+class="social facebook">
+
+<i class="fa-brands fa-facebook-f"></i>
+
+</a>
+
+<a href="https://www.instagram.com/nknoman20"
+target="_blank"
+class="social instagram">
+
+<i class="fa-brands fa-instagram"></i>
+
+</a>
+
+<a href="https://wa.me/8801930474720"
+target="_blank"
+class="social whatsapp">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+
+function updateCard(){
+
+let name = document.getElementById("nameInput").value;
+let roll = document.getElementById("rollInput").value;
+let studentClass = document.getElementById("classInput").value;
+let subject = document.getElementById("subjectInput").value;
+let session = document.getElementById("sessionInput").value;
+let expiry = document.getElementById("expiryInput").value;
+let mobile = document.getElementById("mobileInput").value;
+let emergency = document.getElementById("emergencyInput").value;
+let father = document.getElementById("fatherInput").value;
+let mother = document.getElementById("motherInput").value;
+let address = document.getElementById("addressInput").value;
+let blood = document.getElementById("bloodInput").value;
+let qrText = document.getElementById("qrInput").value;
+
+document.getElementById("studentName").innerText = name;
+document.getElementById("studentRoll").innerText = ": " + roll;
+document.getElementById("studentClass").innerText = ": " + studentClass;
+document.getElementById("studentSubject").innerText = subject;
+document.getElementById("studentSession").innerText = ": " + session;
+document.getElementById("studentExpiry").innerText = ": " + expiry;
+document.getElementById("studentMobile").innerText = ": " + mobile;
+document.getElementById("studentEmergency").innerText = ": " + emergency;
+document.getElementById("studentFather").innerText = ": " + father;
+document.getElementById("studentMother").innerText = ": " + mother;
+document.getElementById("studentAddress").innerText = ": " + address;
+document.getElementById("studentBlood").innerText = "ব্লাড গ্রুপ: " + blood;
+
+document.getElementById("qrCode").src =
+"https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" + qrText;
+
+}
+
+/* PHOTO UPLOAD */
+
+document.getElementById("photoInput")
+.addEventListener("change", function(e){
+
+const file = e.target.files[0];
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+
+document.getElementById("studentPhoto").src =
+event.target.result;
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+/* PDF DOWNLOAD */
+
+function downloadPDF() {
+
+const frontCard =
+document.querySelectorAll(".id-card")[0];
+
+const backCard =
+document.querySelectorAll(".id-card")[1];
+
+const wrapper = document.createElement("div");
+
+wrapper.style.background = "#ffffff";
+wrapper.style.padding = "20px";
+wrapper.style.display = "flex";
+wrapper.style.flexDirection = "column";
+wrapper.style.alignItems = "center";
+
+const frontClone = frontCard.cloneNode(true);
+const backClone = backCard.cloneNode(true);
+
+frontClone.style.marginBottom = "40px";
+
+wrapper.appendChild(frontClone);
+wrapper.appendChild(backClone);
+
+const opt = {
+
+margin:0,
+
+filename:"Student-ID-Card.pdf",
+
+image:{
+type:"jpeg",
+quality:1
+},
+
+html2canvas:{
+scale:4,
+useCORS:true,
+scrollY:0,
+backgroundColor:"#ffffff"
+},
+
+jsPDF:{
+unit:"mm",
+format:"a4",
+orientation:"portrait"
+},
+
+pagebreak:{
+mode:['css','legacy']
+}
+
+};
+
+frontClone.style.pageBreakAfter = "always";
+
+html2pdf()
+.set(opt)
+.from(wrapper)
+.save();
+
+}
+
+</script>
+
+</body>
+</html>
